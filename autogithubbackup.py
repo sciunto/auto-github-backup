@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # Author: Francois Boulogne
-# License: GPLv2+
+# License: GPLv3
 
 import os
 from subprocess import call
