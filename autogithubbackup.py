@@ -6,7 +6,7 @@
 import os
 from subprocess import call
 import random
-import logging
+import logging, logging.handlers
 import subprocess
 
 backup_dir = os.path.expanduser('~/github_backup')
