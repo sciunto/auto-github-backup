@@ -67,21 +67,24 @@ def run(repos):
     """
     Run the backup
     """
+    logger.debug('The script starts')
     random.shuffle(repos)
     for repo in repos:
         logger.info('Check out: ' + str(repo.name))
         backup_path = os.path.join(backup_dir, repo.name)
         if os.path.isdir(backup_path):
-            logger.debug('dir exist')
+            logger.debug('dir already exists')
         else:
             logger.info('First clone for ' + str(repo.name))
             os.makedirs(backup_path, exist_ok=True)
             if repo.is_account():
+                logger.debug('Repository is an account')
                 # soft will clone the repos
                 pass
             else:
                 os.chdir(os.path.join(backup_dir, repo.path))
                 command = [git, 'clone', repo.url, repo.folder]
+                logger.debug('Command: %s' % command)
                 process = subprocess.Popen(command, bufsize=4096, stdout=subprocess.PIPE)
                 stdout, stderr = process.communicate()
                 if stderr:
@@ -92,6 +95,7 @@ def run(repos):
             os.chdir(backup_dir)
             logger.debug(soft + ' ' + repo.name)
             command = [soft, repo.name]
+            logger.debug('Command: %s' % command)
             process = subprocess.Popen(command, bufsize=4096, stdout=subprocess.PIPE)
             stdout, stderr = process.communicate()
             if stderr:
@@ -101,7 +105,7 @@ def run(repos):
         else:
             os.chdir(backup_path)
             command = [soft,]
-            logger.debug(soft)
+            logger.debug('Command: %s' % command)
             process = subprocess.Popen(command, bufsize=4096, stdout=subprocess.PIPE)
             stdout, stderr = process.communicate()
             if stderr:
@@ -109,6 +113,7 @@ def run(repos):
             if stdout:
                 logger.info(stdout)
 
+    logger.debug('The script ends')
 
 if __name__ == '__main__':
     repos = [
