@@ -16,8 +16,24 @@ git = 'git'
 # Set up the logger
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
-steam_handler = logging.StreamHandler()
-logger.addHandler(steam_handler)
+#steam_handler = logging.StreamHandler()
+#logger.addHandler(steam_handler)
+backup_log_dir = os.path.expanduser('~/log')
+if not os.path.isdir(backup_log_dir):
+    os.makedirs(backup_log_dir)
+LOG_PATH = os.path.join(backup_log_dir, 'backup.log')
+log_rotator = logging.handlers.TimedRotatingFileHandler(LOG_PATH,
+                                                        when='midnight',
+                                                        interval=1,
+                                                        backupCount=30,
+                                                        encoding=None,
+                                                        delay=False,
+                                                        utc=False)
+formatter = logging.Formatter('%(asctime)s %(name)s %(levelname)s %(message)s')
+log_rotator.setFormatter(formatter)
+logger.addHandler(log_rotator)
+
+
 
 class Repository():
     """
