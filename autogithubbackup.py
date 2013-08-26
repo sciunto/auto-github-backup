@@ -88,9 +88,9 @@ def run(repos):
                 process = subprocess.Popen(command, bufsize=4096, stdout=subprocess.PIPE)
                 stdout, stderr = process.communicate()
                 if stderr:
-                    logger.warning(stderr)
+                    logger.warning(stderr.decode('utf8'))
                 if stdout:
-                    logger.info(stdout)
+                    logger.info(stdout.decode('utf8'))
         if repo.is_account():
             os.chdir(backup_dir)
             logger.debug(soft + ' ' + repo.name)
@@ -99,9 +99,9 @@ def run(repos):
             process = subprocess.Popen(command, bufsize=4096, stdout=subprocess.PIPE)
             stdout, stderr = process.communicate()
             if stderr:
-                logger.warning(stderr)
+                logger.warning(stderr.decode('utf8'))
             if stdout:
-                logger.info(stdout)
+                logger.info(stdout.decode('utf8'))
         else:
             os.chdir(backup_path)
             command = [soft,]
@@ -109,9 +109,9 @@ def run(repos):
             process = subprocess.Popen(command, bufsize=4096, stdout=subprocess.PIPE)
             stdout, stderr = process.communicate()
             if stderr:
-                logger.warning(stderr)
+                logger.warning(stderr.decode('utf8'))
             if stdout:
-                logger.info(stdout)
+                logger.info(stdout.decode('utf8'))
 
     logger.debug('The script ends')
 
