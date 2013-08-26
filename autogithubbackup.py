@@ -87,7 +87,7 @@ def run(repos):
                 if stderr:
                     logger.warning(stderr)
                 if stdout:
-                    logger.debug(stdout)
+                    logger.info(stdout)
         if repo.is_account():
             os.chdir(backup_dir)
             logger.debug(soft + ' ' + repo.name)
@@ -97,7 +97,7 @@ def run(repos):
             if stderr:
                 logger.warning(stderr)
             if stdout:
-                logger.debug(stdout)
+                logger.info(stdout)
         else:
             os.chdir(backup_path)
             command = [soft,]
@@ -107,7 +107,7 @@ def run(repos):
             if stderr:
                 logger.warning(stderr)
             if stdout:
-                logger.debug(stdout)
+                logger.info(stdout)
 
 
 if __name__ == '__main__':
