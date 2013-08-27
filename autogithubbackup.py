@@ -94,7 +94,7 @@ def run(repos):
                 if stdout:
                     logger.info(stdout.decode('utf8'))
         if repo.is_account():
-            os.chdir(backup_dir)
+            os.chdir(backup_path)
             logger.debug(soft + ' ' + repo.name)
             command = [soft, repo.name]
             logger.debug('Command: %s' % command)
