@@ -16,6 +16,7 @@ git = 'git'
 # Set up the logger
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 #steam_handler = logging.StreamHandler()
 #logger.addHandler(steam_handler)
 backup_log_dir = os.path.expanduser('~/log')
@@ -73,7 +74,7 @@ def run(repos):
         logger.info('Check out: ' + str(repo.name))
         backup_path = os.path.join(backup_dir, repo.name)
         if os.path.isdir(backup_path):
-            logger.debug('dir already exists')
+            logger.debug('Dir %s already exists' % backup_path)
         else:
             logger.info('First clone for ' + str(repo.name))
             os.makedirs(backup_path, exist_ok=True)
@@ -82,6 +83,7 @@ def run(repos):
                 # soft will clone the repos
                 pass
             else:
+                logger.debug('Repository is NOT an account')
                 os.chdir(os.path.join(backup_dir, repo.path))
                 command = [git, 'clone', repo.url, repo.folder]
                 logger.debug('Command: %s' % command)
