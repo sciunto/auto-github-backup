@@ -64,13 +64,16 @@ class Repository():
         return False
 
 
-def run(repos):
+def run(repos, num=None):
     """
     Run the backup
+
+    :param repos: list of repositories
+    :param nump: number of considered repositories
     """
     logger.debug('The script starts')
     random.shuffle(repos)
-    for repo in repos:
+    for repo in repos[:num]:
         logger.info('Check out: ' + str(repo.name))
         backup_path = os.path.join(backup_dir, repo.name)
         if os.path.isdir(backup_path):
